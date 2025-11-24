@@ -1,6 +1,25 @@
-Archive of completed exercises from the course "Classical Complex Systems" I completed in winter semester 2023 at the University of Freiburg.
+# Classical Complex Systems Exercises Archive
 
-## Course Description:
+Archive of the graded exercises I completed from the course "Classical Complex Systems" I completed during the winter semester 2023 at the University of Freiburg.
+
+## Highlights:
+
+- Final grade for course (evaluated from the [final project](./Final_Project/)): 1.3 (1.0 being the best and 4.0 the lowest) 
+- Average grade from all completed (10) exercises: 75%
+
+The exercises were solved using Python, documented as Jupyter notebooks. 
+
+To run the notebooks, a virtual environment with the packages described in [the requirements file](./requirements.txt) is recommended. 
+
+If you use [uv](https://docs.astral.sh/uv/) for package management, download the [TOML file](./pyproject.toml) file into your project folder and run:
+
+```bash
+uv sync
+```
+
+to set up the right package versions.
+
+# Course Description:
 ([source](https://www.physik.uni-freiburg.de/studium/vorlesungsverzeichnis/kmvrlw23.htm#Classical_Complex_Systems))
 
 > Classical Complex Systems
