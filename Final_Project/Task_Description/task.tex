@@ -1,0 +1,153 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tcolorbox}
+\usepackage{siunitx}
+\usepackage{physics}
+\newcommand{\Cov}[1]{\text{Cov}(#1)}
+\newcommand{\Var}[1]{\text{Var}(#1)}
+\title{\textsc{Final Task 12}\\Principal Component Analysis on a Torus}
+\date{}
+\newcommand{\ei}{\boldsymbol{e}_i}
+\newcommand{\eo}{\boldsymbol{e}_1}
+\newcommand{\et}{\boldsymbol{e}_2}
+\begin{document}
+	\maketitle
+	
+	\noindent Return: Hand in a PDF containing the discussion and analysis of \textbf{all} tasks (including the Gromacs simulation procedure) and a separate well-documented source code file (e.g. Jupyter notebook). If feasible, provide the \texttt{.xtc} as well.\\
+	
+	\noindent \textbf{Information}: The tasks are only to guide you and therefore do not contain a complete list of work orders. Due to the randomness of the simulation, the findings will vary and not all suggested parameters will be	optimal.
+	
+	
+	\section*{Introduction}
+	
+	As you know from the exercises, the principal component analysis (PCA) can be used to reduce the dimensionality of an a priori high dimensional system described by correlated coordinates. To this end, the covariance matrix, determined from a system trajectory, is diagonalised and its eigenvalues are ordered from large to small. In this way, the first eigenvector represents more of the total system variance than the second, which describes more than the third and so on. So, only a few degrees of freedom gather most of the total system variance which makes it highly probable that only a subset of them is enough to describe the system in a proper way.
+	
+	Since it is in many fields very important to derive a suitable low-dimensional system. description, there is not only the PCA but numerous other approaches were developed. In this project, we will have a look at how to apply PCA onto periodical input coordinates, in our case dihedral angles. We will compare dihedral principal component analysis (dPCA) with the more advanced principal component analysis on the torus (named dPCA+).
+	\vspace{0.5cm}
+	
+	\noindent\textbf{Obtain from us}: an alanine dipeptide structure file with angle index file and two MDP files with simulation information.$^{1}$
+	
+	\begin{tcolorbox}[colback=white]
+		\textbf{Further reading} The original publication is not needed to complete this exercise, but may be helpful for getting a deeper understanding of the underlying principles.\\
+		
+		$^{1}$ Sittel, F., Filk, T. '\& Stock, G. Principal component analysis on a torus: Theory and application to protein dynamics. J. Chem. Phys. 147, 244101 (2017).
+		
+	\end{tcolorbox}
+	
+	\section*{Task I: Basic Data Consideration}
+	
+	In the following we consider the backbone angles of the alanine dipeptide (Ac-Ala-NHCH$_3$) to evaluate the differences between the different principal component analysis methods.
+	
+	\begin{itemize}
+		\item 	The data given to you contains $\num{2.5e6}$ points of a trajectory of alanine dipeptide, a peptide consisting of two amino acids.
+		
+		\item 	The first column contains the dihedral angle $\phi$, the second column the dihedral angle $\psi$ (see lecture for information on dihedral angles). The points of the trajectory are separated by 200 fs. 
+		
+		\item 	Load the trajectory in your notebook and create a two-dimensional histogram/free energy, i.e., a Ramachandran plot. 
+		
+		\item 	What do you see? How many states, i.e, point accumulations in the coordinate space, do you observe? How are the barriers between the states compared to each other? Why os a periodic treatment of the dihedrals necessary?
+		
+		\item 	For the last task we need the 1d dimensional free energy projection along $\phi$ and $\psi$. Generate them and discuss their distributions as well. What do you see?
+		
+	\end{itemize}
+	
+	\section*{Task II: Principal Component Analysis (PCA)}
+	
+	Now, we want to perform the PCA, just as you know it from sheet X. To this end, we calculate the averages $\expval{\phi}$ and $\expval{\psi}$. The covariance between $ \phi $ and $ \psi $ is defined by
+	
+	\begin{equation}\label{eq:covariance}
+		\Cov{\phi,\psi} = \frac{1}{N} \sum_{i=1}^{N} \left( \phi - \expval{\phi} \right)\left( \psi - \expval{\psi} \right)
+	\end{equation}
+	%
+	where $ N $ is the  number of steps of the simulated trajectory. Therewith, the variance can be defined as
+	
+	\begin{equation}\label{eq:variance}
+		\Var{\xi} = \Cov{\xi,\xi} = \frac{1}{N} \sum_{i=1}^{N} \left( \xi - \expval{\xi} \right)^2 \quad \text{with}\quad \xi = \phi,\psi
+	\end{equation}
+	%
+	Calculate the covariance matrix
+	%
+	\begin{equation}\label{eq:cov-matrix}
+		C = \begin{pmatrix}
+			\Var{\phi}& \Cov{\phi,\psi}\\
+			\Cov{\phi,\psi}& \Var{\psi}
+		\end{pmatrix}
+	\end{equation}
+	%
+	Estimate the corresponding eigenvalues $ \lambda_i $ and eigenvectors $ \ei $ with $ \lambda_1 > \lambda_2 $. Afterwards, we project the trajectory onto the principal components $ x_1 $, $ x_2 $ (PCs) by
+	
+	\begin{equation}\label{eq:project-PCs}
+		\left( \eo,\et \right)^T \cdot \left( \phi(t), \psi(t) \right)^{T} = \left( x_0 (t), x_1 (t) \right)^T
+	\end{equation}
+
+	where $ \left( \eo,\et \right) $ represents the matrix of normalised eigenvectors. With the projected data, plot again the two-dimensional free energy and compare it to the previous Ramachandran plot. What has changed?
+	
+	As motivated in the introduction, the main usage of PCA is to reduce the number of dimensionality. Hence, visualize and discuss the one-dimensional projections on both principal components. Which dynamic would be neglected by projecting onto the first principal component $x_1$?
+	
+	\section*{Task III:  Dihedral Principal Component Analysis (dPCA)}
+	
+	As emphasized above, if we have periodic data it is not straight forward to perform a PCA. Even though it is feasible to implement a periodic metric (like you have implemented in the first few exercises) the mean value is not well-defined, because it normally measures the concentration of angles, and therefore neither the covariance nor the variance. This becomes obvious if one considers equally distributed angles. 
+	
+	To overcome this problem, dPCA was proposed. The idea is to project the periodic data onto a none periodic space. In this case, one projects each input coordinate onto sine and cosine, so 
+	
+	\begin{equation}\label{eq:project-dPCA}
+		\begin{pmatrix}
+			\phi\\
+			\psi
+		\end{pmatrix} = \begin{pmatrix}
+		\sin(\phi)\\
+		\cos(\phi)\\
+		\sin(\psi)\\
+		\cos(\psi)
+	\end{pmatrix}
+	\end{equation}
+	
+	As it can be seen, this projects the periodic space onto a non-periodic one, $ [-\pi,\pi) \times [-\pi,\pi) \mapsto \mathbb{R}^4 $. After this projection, one performs a PCA treating the data points as elements of $ \mathbb{R}^4 $.
+	
+	\begin{itemize}
+		\item 	Project both angles, as described above. Using the straight forward generalization of Task II to 4 dimensions, perform a PCA. 
+		
+		\item 	Project as well only onto the first two principal components and visualize the two-dimensional free energy. How did it change compared to PCA and the Ramachandran-plot?
+		
+		\item 	Visualize the one-dimensional projections on the first and second principal components. Which dynamic would be neglected by projecting onto only the first principal component $ x_1 $? Does it differ compared to PCA? Discuss your findings. Does dPCA perform better or worse compared to PCA?
+		
+	\end{itemize} 
+
+	\section*{Task IV: Principal Component Analysis on a Torus (dPCA+)}
+	
+	As you have hopefully noticed, dPCA overcomes the problem of periodicity but it introduces new ones.  For that reason, an alternative approach was introduced: Principal Component Analysis on a torus (called dPCA+ to emphasize that it is superior to dPCA). Instead of projecting the data, this time we try to minimize the error induced by ignoring the periodicity. Therefore, the input data is shifted such, that the maximal gap lays at the periodic boundary, followed by a non-periodic standard PCA. So, we are left with identifying the maximal gap. There are in general different approaches, either by maximizing the squared distance of the cut to the nearest data points, to minimize the data point density in a corridor (with finite width) or to use the dynamic information of the trajectory by choosing the cut such that we minimize the number of border crossing events.
+	
+	For this task we will define the maximal gap by minimizing the point density of a corridor. We will try to automatize this step, by calculating the optimal shift. Later check if it agrees with the one-dimensional projections obtained in Task I.
+	
+	\begin{itemize}
+		\item 	Generate a density (histogram) of your trajectory along both dihedral angles. Use a reasonable number of bins, to be able to still resolve the density and to have not to much noise at the border regions (between states).
+		
+		\item 	Once calculated, define the bin which is most far away from the next occupied bins. This bin will define the offset $ \xi_{\text{offset}} $  (where $ \xi $ is the angle projected onto)\footnote{1t should be remarked that the offset does not correspond to the value of the bin. Instead, it is the difference between the periodic boundary an the identified region.} Compare this finding with the visualized free energy. Does it agree? If not, try to tune your binning. 
+		
+		\item 	Repeat the procedure for the second dihedral angles. Finally, shift periodic boundary condition such that
+		%
+		\begin{equation}\label{eq:PBC-shift}
+			\left(\phi,\psi\right)^{T} \mapsto \left( \phi + \phi_{\text{offset}} , \psi + \psi_{\text{offset}} \right)
+		\end{equation}
+		%
+		so only the periodic boundary should be shifted to
+		%
+		\begin{equation}\label{eq:PBC-shift-2}
+			\left[-\pi, \pi \right) \times \left[-\pi, \pi \right) \mapsto \left[-\pi + \phi_{\text{offset}}, \pi + \phi_{\text{offset}} \right) \times \left[-\pi + \psi_{\text{offset}}, \pi + \psi_{\text{offset}} \right)
+		\end{equation}
+		%
+		\item 	Afterwards perform a PCA as described in Task II. 
+		
+		\item 	Plot again the two-dimensional free energy and compare it to the previous results (Task I-III). What has changed? 
+		
+		\item 	Visualize and discuss as well the one-dimensional projections on both principal components. 
+		
+	\end{itemize}
+	%
+	Is their any difference compared to dPCA and PCA? If so, explain. Discuss the pros and cons of PCA, dPCA and dPCA+ when handling dihedral angles.
+\end{document}

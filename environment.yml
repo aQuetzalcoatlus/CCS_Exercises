@@ -1,0 +1,12 @@
+name: ccs
+channels:
+  - defaults
+dependencies:
+  - scipy
+  - matplotlib
+  - numba
+  - numpy
+  - ipykernel
+  - pandas
+  - jinja2
+prefix: /home/kjayd/miniconda3/envs/ccs

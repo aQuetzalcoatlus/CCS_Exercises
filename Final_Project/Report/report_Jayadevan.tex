@@ -1,0 +1,143 @@
+%\documentclass[aps, prl, reprint, nofootinbib]{revtex4-2}
+\documentclass[11pt,a4paper,twocolumn]{article}
+%\usepackage{cmbright}
+%\usepackage[OT1]{fontenc}
+% Other packages
+%\usepackage{simpleConference}
+\usepackage[left=1.5cm,right=1.5cm,bottom=3cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+%\usepackage{float}
+%\usepackage{multicol,blindtext}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{physics}
+\usepackage{siunitx}
+\usepackage{listings}
+\usepackage{xcolor,tcolorbox}
+\usepackage{chemfig}
+\usepackage{layouts}
+\usepackage{hyperref}
+\usepackage{subfiles}
+\usepackage{lipsum}
+\usepackage{breqn}
+\usepackage{tikz}
+\usepackage{booktabs}
+%\usepackage{cuted} % to span equations across two columns
+\usepackage{nicefrac}
+\usepackage{subcaption}
+\usepackage[sorting=none]{biblatex}
+%\definecolor{ngreen}{
+\definecolor{ngreen}{HTML}{E1F0DA}
+\definecolor{nblue}{HTML}{40A2E3}
+\definecolor{nred}{HTML}{D04848}
+%\renewcommand{\refname}{References}
+%\bibliographystyle{apsrev4-2}
+%\newtcolorbox{mybox}{
+%	colback=blue!20,
+%	colframe=white,
+%}
+% Setup for listings
+\lstset{
+	language=Python,
+	basicstyle=\ttfamily\small,
+	backgroundcolor=\color{ngreen},
+	frame=none,
+	breaklines=true,
+	captionpos=b,
+	showstringspaces=false,
+	keywordstyle=\color{nblue},
+	stringstyle=\color{nred},
+	commentstyle=\color{gray},
+%	morecomment=[l][\color{magenta}]{\#}
+}
+
+% Custom commands
+\newcommand{\todo}[1]{\textcolor{red}{TODO: #1}}
+\bibliography{references}
+%\addbibresource{references.bib} % Entries are in the refer.bib file
+
+\setlength{\columnsep}{0.8cm}
+\usepackage{fancyhdr}
+%\fancyhead{}
+%\fancyfoot[RO,RE]{Classical Complex Systems Final Project}
+\pagestyle{fancy}
+%\lhead{}
+\renewcommand{\footrulewidth}{0.4pt}% default is 0pt
+\lfoot{\textit{Classical Complex Systems WiSe 2023/24}}
+\lhead{Principal Component Analysis on a Torus}
+%\rfoot{}
+\newcommand{\degree}{^{\circ}}
+\newcommand{\Cov}[1]{\text{Cov}(#1)}
+\newcommand{\Var}[1]{\text{Var}(#1)}
+\begin{document}
+		\title{\textsc{Task 12:\\Principal Component Analysis on a Torus}\\
+		\textcolor{gray}{\textit{Classical Complex Systems WiSe 2023/24}}}
+	\author{Karthik Jayadevan\\(Matriculation Number: 5582876)}
+%	\date{\today}
+	
+	\maketitle
+	
+%	\begin{abstract}
+%		This is the abstract. %\printinunitsof{cm}\prntlen{\textwidth}
+%	\end{abstract}
+	
+%	\tableofcontents
+	
+	\section{Introduction}\label{sec:Introduction}
+		%
+%	 	\subfile{01-Introduction.tex}
+	%
+%		\lipsum[5]
+%	\section{Theory}\label{sec:Theory}
+	% Theory
+		\subfile{02-Theory.tex}
+		%
+	\section{Methods}\label{sec:Methods}
+	%
+		\subfile{03-Methods.tex}
+	
+	
+	\section{Results}\label{sec:Results}
+	% Results
+		\subfile{04-Results.tex}
+	
+	\section{Summary and Discussion}\label{sec:Discussion}
+	% Discussion
+		\subfile{05-Discussion.tex}
+	
+%	\section{Conclusion}\label{sec:Conclusion}
+	% Conclusion
+%		\subfile{06-Conclusion.tex}
+		
+	\appendix
+%	\section{Protein structure}\label{app_sec:Protein}
+	%
+	\section{Structure of document and notebook}
+	%
+	The former part of this document is structured in the conventional format of a research article. All code was performed in a Jupyter notebook, which is exported as a PDF and appended after this report. Some of the functions which are not directly significant to the main tasks are saved as a separate Python file \texttt{ccs_project_helpers.py}. The styling of the plots were done using the \texttt{ggplot} template with additional customizations made in a separate style file \texttt{ccs_project.mplstyle}.
+	
+	Due to unforeseen complications in the \LaTeX formatting, the figures in this document may not appear in their intended sequential order. Hence it is advised to follow the hyperlinks of the images and citations for better readability.
+	
+%	\lstinputlisting[title=ccs_project_helpers.py]{../Coding/ccs_project_helpers.py}
+%	\lstinputlisting{../Coding/ccs_project.mplstyle}
+	
+	\section{Use of LLMs}
+	%
+	The use of Large Language Models (LLMs) has become indispensable in assisting various sectors including research, education, and technology. In this project, the LLM ChatGPT by OpenAI was used occasionally, mainly to find word synonyms, clarify specific command syntax and to ease repetitive tasks (like creating labels for subplots), which helped in making the process more efficient. All code developed in the solution was authored independently, and ChatGPT was used responsibly and fairly as a support tool.
+	
+	Some specific uses:
+	\begin{itemize}
+		\item 	Generated a blank \LaTeX template for the report with placeholders to add different sections and bibliography entries.
+		\item 	Generated a function to label ticks in multiples of $ \pi/4 $ for the plots.
+		\item 	It was also used in the learning stage to clarify meanings of definitions (like peptides and residues), although it did not prove to be much effective.
+	\end{itemize}
+	
+	% References
+	\begin{figure*}
+		\phantomsection
+		\printbibliography[heading=bibintoc]
+	\end{figure*}
+	
+\end{document}

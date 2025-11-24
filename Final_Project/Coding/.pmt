@@ -1,0 +1,15 @@
+I am trying to do a dPCA+ method analysis (see uploaded paper) to analyze the dihedral angles of alanine dipeptide. The data given contains arrays of the phi and psi angles in degrees. 
+
+The histogram of the data for phi (left side subplot) and psi angles (right side subplot) in radians is shown in the attached image. The task is summarized as follows:
+
+ Instead of projecting the data (like in the dihedral PCA method), this time we try to minimize the error induced by ignoring the periodicity. Therefore, the input data is shifted such, that the maximal gap lays at the periodic boundary, followed by a non-periodic standard PCA. So, we are left with identifying the maximal gap. One way to do this is to minimize the data point
+density in a corridor (with finite width).
+
+The detailed steps:
+
+1. Generate a density (histogram) of your trajectory along both dihedral angles. I need to fine-tune to get a reasonable number of bins, to be able to still resolve the density and to have not to much noise at the border regions (between states). 
+
+2. Once calculated, define the bin which is most far away from the next occupied bins. This bin
+will define the offset ξ_{offset}, where ξ is the angle projected onto. Compare this finding with the visualized free energy. We need to select the center of the bin with lowest population as the maximal gap. In case of multiple bins of equally low population, we sum over their respective neighboring bins and select the one with lowest overall population in the neighborhood.
+
+Write a Python code to implement these steps before performing the PCA. Assume that the arrays of dihedral angles (in degrees) are named `phi` and `psi` respectively.

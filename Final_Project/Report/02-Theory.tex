@@ -1,0 +1,61 @@
+%\subsection{Proteins}\label{ssec:proteins}
+
+Proteins are fundamentally composed of monomeric units called amino acids. Each of these amino acids possesses a standard \textit{backbone} structure that facilitates the linkage of one amino acid to another in the sequence. These linkages are referred to as \textit{peptide bonds}. 
+
+%\subsubsection{Dihedral angles and Ramachandran plot}
+Backbone dihedral angles, (\(\phi\) and \(\psi\)), play a key role in the structural configuration of proteins (where the word \textit{di-hedral} accounts for the fact that the angles are measured between two faces/planes). $ \phi $ is defined as the angle in the chain C'-N-C$ ^{\alpha} $-C' (where C' denotes the carbon atom in the carboxyl group, N is Nitrogen and C$ ^{\alpha} $ denotes the alpha carbon). Similarly, $ \psi $ is the angle in the chain C'-N-C$ ^{\alpha} $-C' \cite{dihedral_article_wiki}. The definitions of $ \phi $ and $ \psi $ is depicted in the figure \ref{fig:proteinbackbonephipsiomegadrawing} \cite{dihed_wiki}.
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.25\linewidth]{figures/Protein_backbone_PhiPsiOmega_drawing}
+	\caption{Depiction of dihedral angles \cite{dihed_wiki}}
+	\label{fig:proteinbackbonephipsiomegadrawing}
+\end{figure}
+%
+%\subsubsection{Alanine Dipeptide}
+The molecule that is analyzed in this project is alanine dipeptide (Ac-Ala-NHCH$_3$), a peptide
+consisting of two alanine molecules linked by a peptide bond (see figure \ref{fig:ala-line-diagram}).
+
+\begin{figure}[htbp]
+	\centering
+	\chemfig{H_{3}C-[1]C(=[2]O)-[7]N(-[6]H)-[1]\textcolor{red}{C}(-[2]CH_3)-[7]C(=[6]O)-[1]N(-[2]H)-[7]CH_3}
+	\caption{Line diagram of alanine dipeptide. The alpha Carbon (marked in red) is connected to two peptide bonds.}
+	\label{fig:ala-line-diagram}
+\end{figure}
+
+\subsection{Principal Component Analysis}
+%
+Principal Component Analysis (PCA) is a powerful technique for reducing the complexity of a high-dimensional system\cite{PCA_jolliffe2002}. It involves expressing the system in a coordinate space defined by \textit{principal components}. The original data projected along these components are linear combinations of the original variables, organized so that the projection along the first principal component (PC1) accounts for the maximum variance within the system. Each subsequent principal component captures progressively less variance than its predecessor. Hence this method is commonly used to reduce the dimensionality of a high-dimensional system like that in macromolecules.
+%
+
+\subsection{Dihedral Principal Component Analysis (dPCA)}
+%
+While PCA works well for linear data, the periodic nature of the dihedral angle data gives rise to artifacts in the calculation of PCA. The method can misinterpret the proximity of angles (for example $ -180 \degree $ and $ 179 \degree $) and give misleading results. In the context of such periodic data, hence the calculation of mean, variance and covariance can also be affected (see equations \ref{eq:covariance}, \ref{eq:variance}), which are central to the PCA method. 
+
+
+A solution to this issue was proposed in the dihedral-PCA (dPCA) method \cite{Mu2005}. The angles are transformed using sine and cosine functions, effectively linearizing the circular data. 
+\begin{equation}\label{eq:dPCA-eqn}
+	\begin{pmatrix}
+		\phi\\
+		\psi
+	\end{pmatrix} = \begin{pmatrix}
+		\sin(\phi)\\
+		\cos(\phi)\\
+		\sin(\psi)\\
+		\cos(\psi)
+	\end{pmatrix}
+\end{equation}
+The data gets remapped as follows:
+\begin{equation}\label{eq:dPCA-remap}
+	[-\pi,\pi) \times [-\pi,\pi) \longmapsto \mathbb{R}^4 
+\end{equation}
+This sort of `unwrapping' of the circular data circumvents the issues in the PCA mentioned above \cite{Altis2008}. The detailed method is outlined in section \ref{ssec:task3_dpca}.
+
+\subsection{Dihedral Principal Component Analysis on a Torus (dPCA+)}
+
+While the dPCA method is designed to address the problems arising from periodic data, it gives rise to complexities that make the results difficult to interpret. Since the dihedral angle space form a torus, a method preserving such a topology was introduced in \cite{stock2017}(named dPCA+, with the `+' to indicate its superiority over dPCA). The basic idea here is to minimize the projection error caused by the periodicity of the dihedral angles. This is implemented by identifying a maximal gap in the sampling and shifting the data such that the maximal gap lays at the periodic boundary. 
+Hence the data gets remapped as:
+\begin{equation}\label{eq:PBC-shift}
+	\left(\phi,\psi\right)^{T} \mapsto \left( \phi + \phi_{\text{offset}} , \psi + \psi_{\text{offset}} \right)
+\end{equation}
+This transformed data can then be analyzed by a standard PCA. 
+%

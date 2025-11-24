@@ -1,0 +1,62 @@
+\subsection{PCA}
+
+A scree-plot of the eigenvalues shows the percentage of total variance explained by each PC in the direct PCA analysis of the dihedral angles. The plot obtained (figure \ref{fig:screepca}) indicates that the first PC explains about $80\%$ of the total variance in the system. The two-dimensional free energy and one-dimensional distributions of $ V_1 $ and $ V_2 $ were also plotted (figures \ref{fig:freeenergypca} and \ref{fig:1dv1v2}). The distribution along $ V_1 $ shows two peaks, suggesting that projecting onto $ V_1 $ captured two major conformations or states of the dipeptide. However, the broader and multi-peaked distribution along $ V_2 $ indicated additional dynamics that $ V_1 $ alone does not signify. 
+
+By projecting only onto the first principal component ($ V_1 $), possibly the transitional states between the major conformations that are captured by $ V_2 $ are neglected. These could represent less stable, but significant, intermediate states of the dipeptide's motion or conformational changes that contribute to the overall flexibility and function of the molecule.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\linewidth]{../Coding/final_plots/scree_PCA}
+	\caption{A scree plot of the two principal components obtained from the PCA of $ \phi $ and $ \psi $. PC 1 explains $ 79.29\% $ of the total variance, while PC 2 explains $ 20.71\% $ of the total variance.}
+	\label{fig:screepca}
+\end{figure}
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\linewidth]{../Coding/final_plots/free_energy_PCA}
+	\caption{}
+	\label{fig:freeenergypca}
+\end{figure}
+%
+\begin{figure*}[htbp]
+	\centering
+	\includegraphics[width=\linewidth]{../Coding/final_plots/1d_v1_v2}
+	\caption{}
+	\label{fig:1dv1v2}
+\end{figure*}
+%
+
+\subsection{dPCA}
+%
+The scree plot of the dPCA looked more distributed (figure \ref{fig:screedpca}). $ V_1 $ explained a lesser percentage of variance compared to that in PCA. From the plots of the free energy (\ref{fig:freeenergydpcav1v2}) and the one-dimensional projections of the data (figure \ref{fig:1ddpcav1v2}), it can be inferred that the dPCA method seeks to maintain the periodicity inherent in the data. However, this came at a cost of a lack of interpretability of the results. The plot showed a certain level of sharpness in the minima. The dPCA is better suited for capturing the periodic nature of the data, which is inherent in dihedral angles, while PCA might introduce miscalculations since it assumes linearity in the data. Although dPCA attempts to capture the cyclic nature of the dihedral angle data, it introduced new complexity in interpreting the landscape \cite{Mu2005}. 
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\linewidth]{../Coding/final_plots/scree_dPCA.pdf}
+	\caption{Scree plot from the dPCA: From the code, it was found that the four PCs explain $62.82\%$, $20.38\%$, $9.94\%$ and $6.86\%$ of the total variance respectively. Here the data was projected only to the first two PCs, according to the task guidelines.}
+	\label{fig:screedpca}
+\end{figure}
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\linewidth]{../Coding/final_plots/free_energy_dPCA_V1_V2}
+	\caption{The free energy plot resulting from the dPCA.}
+	\label{fig:freeenergydpcav1v2}
+\end{figure}
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\linewidth]{../Coding/final_plots/1d_dPCA_V1_V2.pdf}
+	\caption{One-dimensional distributions of the PCs from dPCA.}
+	\label{fig:1ddpcav1v2}
+\end{figure}
+%
+\subsection{dPCA+}
+%
+Figure \ref{fig:freeenergydpcaplus} shows the variation of the two-dimensional free energy resulting from the dPCA+ analysis. In the original data plot \ref{fig:freeenergyinitial}, it can be seen that the heatmap gets cut off abruptly at the periodic boundary, for example in the first quadrant. These kinds of abrupt cuts were improved after shifting the data along the maximal gap. 
+%\vspace{-3cm}
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\linewidth]{../Coding/final_plots/free_energy_dPCAPlus.pdf}
+	\caption{}
+	\label{fig:freeenergydpcaplus}
+\end{figure}
+%
+%
