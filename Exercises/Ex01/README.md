@@ -1,3 +1,7 @@
+# Exercise 1: Velocity distributions
+
+- [Link to notebook PDF](./[Jayadevan]-Exercise-01.pdf)
+
 ## Background:
 
 Irrespective of the start conditions, velocity distributions in multi-particle systems with collisions between particles converge to a Maxwell-Boltzmann distribution. You will investigate this effect by creating your own simulation of a multi-particle systems of hard spheres in a 2D-box.
