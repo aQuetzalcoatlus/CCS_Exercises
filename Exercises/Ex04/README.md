@@ -3,7 +3,7 @@
 - [Link to notebook PDF](./[Jayadevan]-Ex04-Free_Energy.pdf)
 
 ## Background
-In the lecture we discussed the free energy landscape $\Delta F(r) = -k_{B} T \ln g(r)$ with the radial distribution function (RDF) $g(r)$. The RDF is an important observable to evaluate the internal ordering of particles within gaseous, liquid, solid, or amorphous phases, respectively. It can be calculated from MD simulations and experimentally measured by, e.g., X-ray or neutron scattering.
+In the lecture we discussed the free energy landscape $\Delta F(r) = -k_{B} T\ \ln g(r)$ with the radial distribution function (RDF) $g(r)$. The RDF is an important observable to evaluate the internal ordering of particles within gaseous, liquid, solid, or amorphous phases, respectively. It can be calculated from MD simulations and experimentally measured by, e.g., X-ray or neutron scattering.
 
 ## Task I: simulation
 
