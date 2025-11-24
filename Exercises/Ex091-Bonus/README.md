@@ -3,8 +3,8 @@ Lecture Classical Complex Systems WS23/24 Exercises
 Distributed: Friday, 2023-12-22
 
 - An interactive version of this exercise (developed using Shiny) is set up [here](https://void0369-contagion.share.connect.posit.cloud/).
-- [Final notebook](./[Jayadevan]_Exercise_bonus.ipynb)
-- [Final notebook (PDF)](./[Jayadevan]_Exercise_bonus.pdf)
+- [Jupyter notebook](./[Jayadevan]_Exercise_bonus.ipynb)
+- [Notebook PDF](./[Jayadevan]_Exercise_bonus.pdf)
 
 ## Background
 Simple particle simulations can be used in a wide range of modelling approaches, even the modelization of behavior or crowds of humans. In this case, each particle is called an "agent". As a bonus "Christmas task", we will use the hard spheres simulations from earlier exercises to check the effect of vaccinations and the compliance of the people with it.
