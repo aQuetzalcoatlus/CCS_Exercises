@@ -1,5 +1,8 @@
 # Exercise 2: Random walk
 
+- [Link to notebook PDF](./[Jayadevan]-Ex02.pdf
+)
+
 In this exercise, numerical calculations are done to show how a Gaussian distribution emerges from
 a random walk, and how the distribution’s first three moments depend on the number of both steps
 and independent walks.
