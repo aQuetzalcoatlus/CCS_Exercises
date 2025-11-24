@@ -10,7 +10,7 @@ Irrespective of the start conditions, velocity distributions in multi-particle s
 - Implement a function that checks if such a collision is happening ("nearest neighbor search") after a jump in time.
 
 ## Task II: simulation
-- Create a 2D box with the dimensions $20\times 20$ nm$^2$.
+- Create a 2D box with the dimensions $20\times 20$ $\text{nm}^2$.
 - Create 50 spherical particles with radius $r = 0.5$ nm (either at random positions or on a regular grid). All particles have the same mass, and therefore the absolute mass can be ignored (why?).
 - Assign a velocity $v$ with $|v|=0.5$ nm per numerical iteration step and random direction to each particle.
 - Use the same Euler integrator scheme as in the 1st exercise.
