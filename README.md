@@ -4,7 +4,8 @@ Archive of the graded exercises I completed from the course "Classical Complex S
 
 ## Highlights
 
-- Final grade for course (evaluated from the [final project](./Final_Project/)): **1.3** (1.0 being the best and 4.0 the lowest) 
+- Final grade for course (evaluated from the [final project](./Final_Project/)): **1.3** (1.0 being the best and 4.0 the lowest)
+- [Final project](./Final_Project/): PCA Analysis on protein simulation data
 - Average grade from all completed (10) exercises: 75%
 
 ## Instructions
