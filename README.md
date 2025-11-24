@@ -1,6 +1,6 @@
-# Classical Complex Systems Exercises Archive
+# Classical Complex Systems (Selected Exercises Archive)
 
-Archive of the graded exercises I completed from the course "Classical Complex Systems" I completed during the winter semester 2023 at the University of Freiburg.
+Archive of a few of the selected graded exercises I completed from the course "Classical Complex Systems" I completed during the winter semester 2023 at the University of Freiburg.
 
 ## Highlights
 
