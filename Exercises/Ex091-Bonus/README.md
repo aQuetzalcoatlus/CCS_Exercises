@@ -2,10 +2,14 @@
 Lecture Classical Complex Systems WS23/24 Exercises
 Distributed: Friday, 2023-12-22
 
+- An interactive version of this exercise (developed using Shiny) is set up [here](https://void0369-contagion.share.connect.posit.cloud/).
+- [Final notebook](./[Jayadevan]_Exercise_bonus.ipynb)
+- [Final notebook (PDF)](./[Jayadevan]_Exercise_bonus.pdf)
+
 ## Background
 Simple particle simulations can be used in a wide range of modelling approaches, even the modelization of behavior or crowds of humans. In this case, each particle is called an "agent". As a bonus "Christmas task", we will use the hard spheres simulations from earlier exercises to check the effect of vaccinations and the compliance of the people with it.
 
-# Task I: Implementation
+## Task I: Implementation
 
 Add the following parameters to your hard spheres simulation code:
 - Give the hard spheres three new properties: "healthy", "infected" and "immunized".
@@ -15,7 +19,7 @@ Add the following parameters to your hard spheres simulation code:
 - After 500 steps, an infected particle becomes "immunized".
 - Under these rules re-infections can occur, too.
 
-# Task II: Simulation
+## Task II: Simulation
 
 - Create a 2D box with the dimensions 50x50 nm2. and without periodic boundary conditions.
 - Create 50 hard sphere particles with radius r = 0.5 nm (either at random positions or on a regular grid).
@@ -25,7 +29,7 @@ Add the following parameters to your hard spheres simulation code:
 - Carry out a simulation of 10000 steps.
 - Run the simulations once with all particles moving, and once each where 20%, 50%, 80% and 90% are vaccinated, i.e., immunized.
 
-# Task III: Data Evaluation of positions
+## Task III: Data Evaluation of positions
 
 - Compare the number of "infected" particles in the four simulations over time.
 - Interpret the results in the scope of how efficient a vaccination campaign depending on the percentage of vaccinated population is:
